@@ -1,42 +1,25 @@
-import { books } from "./books.repository.js";
-const bookIssueHistory = [];
+import { BookIssueModel } from "../models/book-issue.model.js";
+import { BookModel } from "../models/book.model.js";
 
 export const issueBook = async (username, isbn) => {
-  bookIssueHistory.push({
-    username,
-    isbn,
-    isReturned: false,
-  });
-  books.forEach((book) => {
-    const { isbn: bookISBN } = book;
-    if (bookISBN == isbn) {
-      book.quantity -= 1;
+  await BookIssueModel.create({ username, isbn });
+  await BookModel.updateOne(
+    { isbn },
+    {
+      $inc: {
+        quantity: -1,
+      },
     }
-  });
+  );
   return true;
 };
 
 export const returnBook = async (username, isbn) => {
-  bookIssueHistory.forEach((bookIssue) => {
-    const {
-      username: currBookOwner,
-      isbn: issuedBookISBN,
-      isReturned: isBookReturned,
-    } = bookIssue;
-    if (
-      currBookOwner == username &&
-      issuedBookISBN == isbn &&
-      !isBookReturned
-    ) {
-      bookIssue.isReturned = true;
-    }
-  });
-  books.forEach((book) => {
-    const { isbn: bookISBN } = book;
-    if (bookISBN == isbn) {
-      book.quantity += 1;
-    }
-  });
+  await BookIssueModel.updateOne(
+    { username, isbn, isReturned: false },
+    { isReturned: true }
+  );
+  await BookModel.updateOne({ isbn }, { $inc: { quantity: 1 } });
   return true;
 };
 
@@ -44,14 +27,5 @@ export const checkIfBookIsAlreadyIssuedToGivenUserOrNot = async (
   username,
   isbn
 ) => {
-  return bookIssueHistory.find((bookIssue) => {
-    const {
-      username: currBookOwner,
-      isbn: issuedBookISBN,
-      isReturned: isBookReturned,
-    } = bookIssue;
-    return (
-      currBookOwner == username && issuedBookISBN == isbn && !isBookReturned
-    );
-  });
+  return BookIssueModel.findOne({ username, isbn, isReturned: false });
 };

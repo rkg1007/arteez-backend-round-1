@@ -1,23 +1,15 @@
-export const users = [];
+import { UserModel } from "../models/user.model.js";
+import { BookIssueModel } from "../models/book-issue.model.js";
 
 export const findUserWithUsernameOrEmail = async (filter) => {
-  return users.find((user) => {
-    let isMatching = false;
-    if (filter.email) {
-      isMatching = isMatching || filter.email == user.email;
-    }
-    if (filter.username) {
-      isMatching = isMatching || filter.username == user.username;
-    }
-    return isMatching;
-  });
+  return UserModel.findOne({ $or: filter });
 };
 
 export const createUser = async (newUserObject) => {
-  users.push(newUserObject);
-  return users.length;
+  const newUser = await UserModel.create(newUserObject);
+  return newUser._id;
 };
 
 export const getUserBorrowedBooks = async (username) => {
-  return [{ isbn: "abcd" }, { isbn: "efgh" }];
+  return BookIssueModel.find({ username, isReturned: false });
 };

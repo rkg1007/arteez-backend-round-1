@@ -1,7 +1,7 @@
 import * as userRepository from "../repositories/users.repository.js";
 import * as bookRepository from "../repositories/books.repository.js";
 import * as bookIssueRepository from "../repositories/book-issue.repository.js";
-import { isEmpty } from "../utils/common.util.js";
+import { isEmpty, isNotEmpty } from "../utils/common.util.js";
 import { NotFoundError } from "../errors/not-found.error.js";
 import {
   bookErrors,
@@ -11,9 +11,11 @@ import {
 import { BadRequestError } from "../errors/bad-request.error.js";
 
 export const issueBook = async (username, isbn) => {
-  const existingUser = await userRepository.findUserWithUsernameOrEmail({
-    username,
-  });
+  const existingUser = await userRepository.findUserWithUsernameOrEmail([
+    {
+      username,
+    },
+  ]);
   if (isEmpty(existingUser)) {
     throw new NotFoundError(userErrors.USER_NOT_FOUND);
   }
@@ -22,6 +24,17 @@ export const issueBook = async (username, isbn) => {
   if (isEmpty(existingBook)) {
     throw new NotFoundError(bookErrors.BOOK_NOT_FOUND);
   }
+
+   const existingBookIssueHistory =
+     await bookIssueRepository.checkIfBookIsAlreadyIssuedToGivenUserOrNot(
+       username,
+       isbn
+     );
+   if (isNotEmpty(existingBookIssueHistory)) {
+     throw new BadRequestError(
+       bookIssueErrors.BOOK_ALREADY_ISSUED_TO_GIVEN_USER
+     );
+   }
 
   const { quantity: availableBookQuantity } = existingBook;
   if (availableBookQuantity <= 0) {

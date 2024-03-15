@@ -6,4 +6,4 @@ export const bookRouter = Router();
 
 bookRouter.post("/", asyncWrapper(bookController.addBook));
 bookRouter.get("/", asyncWrapper(bookController.getAllBooks));
-bookRouter.get("/:bookId", asyncWrapper(bookController.getBook));
+bookRouter.get("/:isbn", asyncWrapper(bookController.getBook));

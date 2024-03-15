@@ -8,8 +8,8 @@ export const getAllBooks = async () => {
     return bookRepository.getAllBooks();
 }
 
-export const getBook = async (bookId) => {
-    const book = await bookRepository.getBookById(bookId);
+export const getBook = async (isbn) => {
+    const book = await bookRepository.getBookByISBN(isbn);
     if (isEmpty(book)) {
         throw new NotFoundError(bookErrors.BOOK_NOT_FOUND);
     }
@@ -18,6 +18,7 @@ export const getBook = async (bookId) => {
 
 export const addBook = async (requestBody) => {
     const { title, author, quantity, isbn } = requestBody;
+    
     // check if book already exists or not with given isbn number
     const existingBook = await bookRepository.getBookByISBN(isbn);
     if (isNotEmpty(existingBook)) {

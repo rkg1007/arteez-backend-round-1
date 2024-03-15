@@ -5,8 +5,8 @@ export const getAllBooks = async () => {
 };
 
 export const getBook = async (req) => {
-  const { bookId } = req.params;
-  return bookService.getBook(bookId);
+  const { isbn } = req.params;
+  return bookService.getBook(isbn);
 };
 
 export const addBook = async (req) => {
