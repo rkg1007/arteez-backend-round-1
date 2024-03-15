@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import * as config from "../utils/config.js";
+import * as config from "../utils/config.util.js";
 
 const JWT_SECRET_KEY = config.get("JWT_SECRET_KEY");
 const JWT_EXPIRY_TIME = config.get("JWT_EXPIRY_TIME"); // in days e.g 1d, 2d...

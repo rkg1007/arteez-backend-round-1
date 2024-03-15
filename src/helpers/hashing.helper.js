@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import * as config from "../utils/config.js";
+import * as config from "../utils/config.util.js";
 
 const HASHING_SALT_ROUDS = config.get('HASHING_SALT_ROUDS') || 10;
 

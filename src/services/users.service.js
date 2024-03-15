@@ -1,7 +1,7 @@
 import * as userRepository from "../repositories/users.repository.js";
 import * as hashingHelper from "../helpers/hashing.helper.js";
 import * as jwtHelper from "../helpers/jwt.helper.js";
-import { isEmpty, isNotEmpty, isEmail } from "../utils/common.js";
+import { isEmpty, isNotEmpty, isEmail } from "../utils/common.util.js";
 import { userErrors } from "../constants/errors.contant.js";
 import { BadRequestError } from "../errors/bad-request.error.js";
 import { NotFoundError } from "../errors/not-found.error.js";

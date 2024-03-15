@@ -1,7 +1,7 @@
 import express from "express";
 import { apiRouter } from "./src/routes/index.js";
 import { errorHandler } from "./src/middlewares/error-handler.middleware.js";
-import * as config from "./src/utils/config.js"
+import * as config from "./src/utils/config.util.js"
 
 const HOST = config.get("HOST") || "localhost";
 const PORT = config.get("PORT") || "5000";
