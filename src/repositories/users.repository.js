@@ -1,4 +1,4 @@
-const users = [];
+export const users = [];
 
 export const findUserWithUsernameOrEmail = async (filter) => {
   return users.find((user) => {

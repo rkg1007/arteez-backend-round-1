@@ -6,5 +6,10 @@ export const userErrors = {
 
 export const bookErrors = {
     BOOK_ALREADY_EXIST: 'Book already exists with given ISBN number.',
-    BOOK_NOT_FOUND: 'Book with given id is not found.'
+    BOOK_NOT_FOUND: 'Book with given id is not found.',
+    ENOUGH_QUANTITY_NOT_AVAILABLE: 'Enough quantity of given book is not available.'
+}
+
+export const bookIssueErrors = {
+    BOOK_IS_NOT_ISSUED_TO_GIVEN_USER: 'Given book is not issued to given user.'
 }

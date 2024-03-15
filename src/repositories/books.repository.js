@@ -1,4 +1,4 @@
-const books = [];
+export const books = [];
 
 export const getAllBooks = async () => {
   return books;
