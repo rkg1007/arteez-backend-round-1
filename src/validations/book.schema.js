@@ -25,3 +25,12 @@ export const addBookSchema = Joi.object({
     "number.integer": "Quantity should be a integer",
   }),
 });
+
+export const isbnSchema = Joi.object({
+  isbn: Joi.string().min(5).max(5).required().messages({
+    "string.min": "Invalid ISBN number",
+    "string.max": "Invalid ISBN number",
+    "any.required": "Invalid ISBN number",
+    "string.base": "Invalid ISBN number",
+  }),
+});
