@@ -1,7 +1,6 @@
 import { CustomDSGError } from "../errors/custom.error.js";
 
 export const errorHandler = (err, req, res, next) => {
-  console.log(err);
   let error = "something went wrong";
   let statusCode = 500;
   if (CustomDSGError.isCustomDSGError(err) && !err.isPrivate) {

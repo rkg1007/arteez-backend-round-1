@@ -1,3 +1,5 @@
+import Joi from "joi";
+
 export const bookIssueSchema = Joi.object({
   isbn: Joi.string().min(5).max(5).required().messages({
     "string.min": "Invalid ISBN number",
