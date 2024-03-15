@@ -14,16 +14,15 @@ MongoDB for storing book and user information.
 
 ## Endpoints
 
-1. POST /api/books: Endpoint to allow librarians to add new books to the library. Each book should
-2. have a title, author, ISBN, and quantity available.
-3. GET /api/books: Retrieve a list of all available books.
-4. GET /api/books/:id: Retrieve a specific book by its ID.
-5. POST /api/users: Allow users to register with a username, email, and password. Store user data
+1. POST /api/books :- Endpoint to allow librarians to add new books to the library. Each book should have a title, author, ISBN, and quantity available.
+3. GET /api/books :- Retrieve a list of all available books.
+4. GET /api/books/:isbn :- Retrieve a specific book by its ID.
+5. POST /api/users :- Allow users to register with a username, email, and password. Store user data
    in MongoDB.
-6. POST /api/users/login: Allow registered users to log in.
-7. POST /api/borrow/:bookId/:userId: Allow users to borrow a book. Update the quantity available.
-8. POST /api/return/:bookId/:userId: Allow users to return a book. Update the quantity available.
-9. GET /api/users/:userId/books: Retrieve a list of books borrowed by a specific user.
+6. POST /api/users/login :- Allow registered users to log in.
+7. POST /api/borrow/:isbn/:username :- Allow users to borrow a book. Update the quantity available.
+8. POST /api/return/:isbn/:username :- Allow users to return a book. Update the quantity available.
+9. GET /api/users/:username/books :- Retrieve a list of books borrowed by a specific user.
 
 ## Validation
 
